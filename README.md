@@ -1,6 +1,7 @@
 # InstaLoan
 
 # Step1 for create database on mysql
+      import .sql file (InstaLoan/MySQLDatabase/) from this path 
 
 # Step2 for Run back end code
       Go to below path
