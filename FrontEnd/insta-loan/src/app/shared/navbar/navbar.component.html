@@ -1,0 +1,169 @@
+<nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom headroom--top headroom--pinned">
+ 
+<div >
+  <a class="navbar-brand mr-lg-5" [routerLink]="['/home']">
+      <img src="./assets/img/brand/InstaLoan.png">
+    </a>
+</div>
+  <div class="container" >
+   <!-- <a class="navbar-brand mr-lg-5" [routerLink]="['/home']">
+      <img src="./assets/img/brand/argon-white.png">
+    </a>-->
+    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="navbar_global" [ngbCollapse]="isCollapsed">
+      <div class="navbar-collapse-header">
+        <div class="row">
+          <div class="col-6 collapse-brand">
+            <a [routerLink]="['/home']">
+              <img src="./assets/img/brand/blue.png">
+            </a>
+          </div>
+          <div class="col-6 collapse-close">
+            <button type="button" class="navbar-toggler" (click)="isCollapsed = !isCollapsed"
+                  [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+        <!--reva-->
+      
+          <li class="nav-item dropdown">
+          <a class="nav-link no-caret" data-toggle="dropdown" role="button">
+            <i class="ni ni-ui-04 d-lg-none"></i>
+            <span class="nav-link-inner--text">Cards</span>
+          </a>
+          
+          <div class="dropdown-menu-xl dropdown-menu" >
+            <div class="dropdown-menu-inner">
+              
+            <a [routerLink]="['/landing']" class="dropdown-item">credit card</a>
+            <a [routerLink]="['/user-profile']" class="dropdown-item">Secured card</a>
+            <a [routerLink]="['/login']" class="dropdown-item">Debit card</a>        
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown" >
+          <a class="nav-link no-caret" (click)="personalLoan()"  data-toggle="dropdown" role="button">
+            <i class="ni ni-ui-04 d-lg-none"></i>
+            <span class="nav-link-inner--text">Personal Loan</span>
+          </a>
+        
+        </li>
+         <li class="nav-item dropdown" >
+          <a class="nav-link no-caret" [routerLink]="['/loans']"  data-toggle="dropdown" role="button">
+            <i class="ni ni-ui-04 d-lg-none"></i>
+            <span class="nav-link-inner--text">EMI  Calculator</span>
+          </a>
+        
+        </li>
+
+               <li class="nav-item dropdown">
+          <a class="nav-link no-caret"  data-toggle="dropdown" role="button">
+            <i class="ni ni-ui-04 d-lg-none"></i>
+            <span class="nav-link-inner--text">Other Loans</span>
+          </a>
+          
+            <div class="dropdown-menu">
+            <a (click)="homeLoan()" class="dropdown-item">Home Loan </a>
+            <a (click)="businesslLoan()" class="dropdown-item">Business Loan </a>
+            <a  class="dropdown-item">Educational Loan  </a>
+             <a  class="dropdown-item"> Gold Loan </a>
+              <a  (click)="carLoan()" class="dropdown-item"> Car Loan </a>
+             
+          </div>
+        </li>
+        <!--End -->
+        <li class="nav-item dropdown">
+          <a class="nav-link no-caret" data-toggle="dropdown" role="button">
+            <i class="ni ni-ui-04 d-lg-none"></i>
+            <span class="nav-link-inner--text">Investments</span>
+          </a>
+
+                  <div class="dropdown-menu">
+            <a [routerLink]="['/landing']" class="dropdown-item">Saving Account</a>
+            <a [routerLink]="['/user-profile']" class="dropdown-item">Fixed Deposit </a>
+            <a [routerLink]="['/login']" class="dropdown-item">Mutual Fund </a>
+             <a [routerLink]="['/login']" class="dropdown-item">Digital Gold </a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link no-caret" data-toggle="dropdown" role="button">
+            <i class="ni ni-collection d-lg-none"></i>
+            <span class="nav-link-inner--text">Insurances</span>
+          </a>
+          <div class="dropdown-menu">
+            <a [routerLink]="['/landing']" class="dropdown-item">Health Insurance</a>
+            <a  class="dropdown-item">Life Insurance</a>
+            <a [routerLink]="['/login']" class="dropdown-item">Motor Insurance</a>
+          </div>
+        </li>
+
+        
+
+        <!--<span *ngIf="isLoggedIn$ | async as isLoggedIn"> 
+           <li class="nav-item dropdown" *ngIf="isShown">
+          <a class="nav-link no-caret" data-toggle="dropdown" role="button">
+            <i class="ni ni-collection d-lg-none"></i>
+            <span class="nav-link-inner--text">Notification</span>
+          </a>-->
+      </ul>
+             
+        <ul class="navbar-nav navbar-nav-hover align-items-lg-center ml-lg-auto">
+           <li class="nav-item dropdown" *ngIf="isLoggedIn$  | async as isLoggedIn ">
+          <a [routerLink]="['/user-profile']" class="nav-link nav-link-icon" data-toggle="dropdown" *ngIf="isShown">
+            <i class="ni ni-email-83  "></i>
+            <span class="badge badge-white">{{count}}</span>
+
+           <!-- <i class="ni ni-ui-04 d-lg-none"></i>
+            <span class="nav-link-inner--text">Components</span>-->
+          </a>
+        </li>
+         <li class="nav-item" *ngIf="isLoggedIn$ | async as isLoggedIn">
+          <a *ngIf="isLoggedIn" class="nav-link nav-link-icon" data-toggle="tooltip" title="Star us on Github">
+            <i class="ni ni-circle-08"></i>
+            <span class="nav-link-inner--text d-lg-none">Profile</span>
+          </a>
+        </li>
+        <li (click)="onLogIn()" class="nav-item d-none d-lg-block ml-lg-4" *ngIf="!isLogged" >
+          <a   class="btn btn-neutral btn-icon">
+            <span class="btn-inner--icon" >
+             <!-- <i class="fa fa-cloud-download mr-2"></i>-->
+            </span>
+            <span (click)="onLogIn()" class="nav-link-inner--text" >Login</span>
+          </a>
+        </li>
+        <span *ngIf="isLoggedIn$ | async as isLoggedIn">
+        <li (click)="onLogout()" *ngIf="isLoggedIn" class="nav-item d-none d-lg-block ml-lg-4" >
+          <a   class="btn btn-neutral btn-icon" >
+            <span class="btn-inner--icon">
+              <i class="ni ni-button-power"></i>
+            </span>
+            <span  class="nav-link-inner--text" >Logout</span>
+          </a>
+        </li>
+</span>
+      </ul>
+    </div>
+
+  </div>
+  <!--<a (click)="onLogIn()"  class="btn btn-primary btn-icon " *ngIf="!isLogged" style="margin:10px;">Login</a>--
+
+  <div *ngIf="isLoggedIn$ | async as isLoggedIn"> 
+    <a (click)="onLogout()" class="btn btn-neutral btn-icon" *ngIf="isLoggedIn" style="margin:10px;"><span class="btn-inner--icon">
+            </span>
+            <span  class="nav-link-inner--text" >Logout</span></a>
+     <a  (click)="onLogout()" class="btn btn-neutral btn-icon" *ngIf="!isLogged">
+            <span class="btn-inner--icon">
+              <i class="fa fa-sign-out mr-2"></i>
+            </span>
+            <span  class="nav-link-inner--text" >Logout</span>
+          </a>
+  </div>-->
+</nav>
