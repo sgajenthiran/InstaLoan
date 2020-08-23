@@ -12,33 +12,12 @@ var connection = mysql.createConnection({
   multipleStatements: true
 });  
 
-/*
-app.use(bodyParser.urlencoded({
-    extended: true
-}));*/
-
-/*const corsOpts = {
-  origin: '*',
-
-  methods: [
-    'GET',
-    'POST',
-  ],
-
-  allowedHeaders: [
-    'Content-Type',
-  ],
-};
-
-app.use(cors(corsOpts));*/
-
 app.use((req, res, next) => {
-	    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
 
-  //res.header('Access-Control-Allow-Origin', '*');
   next();
 });
 
@@ -46,14 +25,6 @@ app.use((req, res, next) => {
  * Parses the text as JSON and exposes the resulting object on req.body.
  */
 app.use(bodyParser.json());
-
-
-
-
-
-	
-	
-
 
 app.post('/getLoginAuthendicate', function (req, res) {
 	console.log(req.body.password);
@@ -63,15 +34,14 @@ app.post('/getLoginAuthendicate', function (req, res) {
 	
 	//var query='select * from user where email="sathishkumar.g1989@gmail.com" and password="sathish@1989";SELECT count(*) FROM alert WHERE readflag ="Y";';
 	
-	var query='select * from user where email="'+req.body.userName+'" and password="'+req.body.password+'";SELECT count(*) as count FROM alert WHERE readflag ="N";';
+	var query='select * from user where email="'+req.body.userName+'" and password="'+req.body.password+'";SELECT count(*) as count FROM alert;';
 	
 	//var query='select * from user where email="sathishkumar.g1989@gmail.com" and password="sathish@1989";';
-	
 	
 
 	connection.query(query,[1,2], function(err, rows, fields)   {  
 		res.contentType('application/json');
-	var	response={};
+		var	response={};
 		if (err){
 			response.result="Failure";
 			response.errorMsg="At this time unable proccess request";
@@ -95,8 +65,6 @@ app.post('/getLoginAuthendicate', function (req, res) {
 					response.result="Failure";
 					response.errorMsg="Invalid username or password.";
 				}
-			
-			
 			
 			res.send(JSON.stringify(response));
 		}  
@@ -152,31 +120,37 @@ app.post('/saveUserDetails', function (req, res) {
 	
 })
 
-app.get('/loanDetails', function (req, res) {
+app.post('/loanDetails', function (req, res) {
 
 console.log(req.body);
 
-let name  = "sathish Kumar";
-let email = "sathish@gmail.com";
-let panNo = "ABCDS7687A";
-let mobile  = "1234567890";
-let loanAmt = "100000";
-let typeOfLoan = "Personal Loan";
-let annualIncome = "500000";
-let city  = "Chennai";
-let salaryrecivedBank = "SBI";
-let empType = "Salary";
-let vechileType = "Two wheeler";
+let salaryrecivedBank;
+let name  = req.body.name;
+let email = req.body.email;
+let panNo = req.body.panNo;
+let mobile  = req.body.mobile;
+let loanAmt = req.body.loanAmt;
+let typeOfLoan = req.body.typeOfLoan;
+let annualIncome = req.body.annualIncome;
+let city  = req.body.city;
+if(req.body.salaryrecivedBank == undefined){
+	salaryrecivedBank = 'NULL';
+}else{
+	salaryrecivedBank = req.body.salaryrecivedBank;
+}
+ 
+let empType = req.body.empType;
+let vechileType ;
+if(req.body.vechileType == undefined){
+	vechileType = 'NULL';
+}else{
+	vechileType = req.body.salaryrecivedBank;
+}
 
-	
 
 let message = name +' Registered '+typeOfLoan+ ' on '+ loanAmt+ ' rs amount Mobile no is '+ mobile+ ' and email id is '+email+' on ' + new Date().toString().slice(0,25);
 
 let query= 'INSERT INTO instantUser (name, email, panNo, mobile, loanAmt, typeOfLoan, annualIncome, city, salaryrecivedBank, empType, vechileType, date) VALUES ("'+name+'", "'+email+'", "'+panNo+'", "'+mobile+'", "'+loanAmt+'", "'+typeOfLoan+'",  "'+annualIncome+'", "'+city+'", "'+salaryrecivedBank+'", "'+empType+'", "'+vechileType+'",current_timestamp());INSERT INTO alert (alertid, email, readflag, date,message) VALUES (NULL, "'+email+'", "N", current_timestamp(),"'+message+'")';
-
-
-
-
 
 	
 	connection.query(query,[1,2], function(err, rows, fields)   {  
@@ -211,12 +185,13 @@ app.get('/getAlertList', function (req, res) {
 		if (err){
 			response.result="Failure";
 			response.errorMsg="At this time unable proccess request";
-			
+			response.count=0;
 			console.log(err)
 			res.send(JSON.stringify(response));
 			//throw err;  
 		} else{
 			response.result="Success";
+			response.count=rows.length;
 			response.alertList =  [];
 			var alert = {};
 			for(var i=0; i<rows.length; i++){
@@ -227,9 +202,6 @@ app.get('/getAlertList', function (req, res) {
 			
 			response.alertList.push(alert);
 			}
-
-			
-
 			
 			res.send(JSON.stringify(response));
 			
@@ -241,17 +213,10 @@ app.get('/getAlertList', function (req, res) {
 
 
 
-
-
 app.get('/', function(req, res){
 	console.log('Index Page on loading...');
   res.sendFile(__dirname + '/login.html');
 });
-
-
-
-
-
 
 
 http.listen(port, "192.168.18.26",function(){

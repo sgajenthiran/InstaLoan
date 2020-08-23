@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 16, 2020 at 05:55 PM
+-- Generation Time: Aug 23, 2020 at 04:56 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.32
 
@@ -47,14 +47,14 @@ INSERT INTO `alert` (`alertid`, `email`, `readflag`, `date`, `message`) VALUES
 (21, 'aa@bb.com', 'N', '2020-08-09 18:12:39', 'Test Registered Personal loan on 100000 rs amount Mobile no is 9003274341 and email id is aa.d1988@gmail.com'),
 (22, 'gowtham90@gmail.com', 'N', '2020-08-09 19:36:38', 'Gowtham Registered with emaild id is gowtham90@gmail.com on Sun Aug 09 2020 19:36:38 '),
 (25, 'sathish@gmail.com', 'N', '2020-08-09 20:29:17', 'sathish Kumar Registered Personal Loan on 100000 rs amount Mobile no is 1234567890 and email id is sathish@gmail.com on Sun Aug 09 2020 20:09:17 '),
-(26, 'sathish@gmail.com', 'N', '2020-08-09 20:36:05', 'sathish Kumar Registered Personal Loan on 100000 rs amount Mobile no is 1234567890 and email id is sathish@gmail.com on Sun Aug 09 2020 20:36:05 '),
 (27, 'sathish@gmail.com', 'N', '2020-08-09 20:36:24', 'sathish Kumar Registered Personal Loan on 100000 rs amount Mobile no is 1234567890 and email id is sathish@gmail.com on Sun Aug 09 2020 20:36:24 '),
-(28, 'sathish@gmail.com', 'N', '2020-08-09 20:36:26', 'sathish Kumar Registered Personal Loan on 100000 rs amount Mobile no is 1234567890 and email id is sathish@gmail.com on Sun Aug 09 2020 20:36:26 '),
 (29, 'sathish@gmail.com', 'N', '2020-08-09 20:36:27', 'sathish Kumar Registered Personal Loan on 100000 rs amount Mobile no is 1234567890 and email id is sathish@gmail.com on Sun Aug 09 2020 20:36:27 '),
 (30, 'sathish@gmail.com', 'N', '2020-08-13 14:14:49', 'sathish Kumar Registered Personal Loan on 100000 rs amount Mobile no is 1234567890 and email id is sathish@gmail.com on Thu Aug 13 2020 14:14:49 '),
-(31, 'reva.shailaja@gmail.com', 'N', '2020-08-14 11:38:04', 'sss Registered with emaild id is reva.shailaja@gmail.com on Fri Aug 14 2020 11:38:04 '),
-(32, 'shyludev@gmail.com', 'N', '2020-08-14 11:49:17', 'shailajadevadoss Registered with emaild id is shyludev@gmail.com on Fri Aug 14 2020 11:49:17 '),
-(33, 'sathish@gmail.com', 'N', '2020-08-16 21:16:32', 'sathish Kumar Registered Personal Loan on 100000 rs amount Mobile no is 1234567890 and email id is sathish@gmail.com on Sun Aug 16 2020 21:16:32 ');
+(62, 'aa@ee.com', 'N', '2020-08-23 16:21:31', 'reva Registered personalLoan on 60000 rs amount Mobile no is 8807805654 and email id is aa@ee.com on Sun Aug 23 2020 16:21:31 '),
+(63, 'dd@ee.com', 'N', '2020-08-23 16:27:40', 'testing Registered HomeLoan on 567899 rs amount Mobile no is 78976576 and email id is dd@ee.com on Sun Aug 23 2020 16:27:40 '),
+(64, 'harian@gmail.com', 'N', '2020-08-23 20:16:11', 'Harian Registered with emaild id is harian@gmail.com on Sun Aug 23 2020 20:16:11 '),
+(65, 'undefined', 'N', '2020-08-23 20:18:31', 'undefined Registered HomeLoan on undefined rs amount Mobile no is undefined and email id is undefined on Sun Aug 23 2020 20:18:31 '),
+(66, 'ee@gg.com', 'N', '2020-08-23 20:22:29', 'devadoss Registered HomeLoan on 500000 rs amount Mobile no is 8896795456 and email id is ee@gg.com on Sun Aug 23 2020 20:22:29 ');
 
 -- --------------------------------------------------------
 
@@ -69,9 +69,9 @@ CREATE TABLE `instantUser` (
   `mobile` varchar(100) NOT NULL,
   `loanAmt` varchar(100) NOT NULL,
   `typeOfLoan` varchar(100) NOT NULL,
-  `annualIncome` varchar(100) NOT NULL,
+  `annualIncome` varchar(100) DEFAULT NULL,
   `city` varchar(100) NOT NULL,
-  `salaryrecivedBank` varchar(100) NOT NULL,
+  `salaryrecivedBank` varchar(100) DEFAULT NULL,
   `empType` varchar(100) DEFAULT NULL,
   `vechileType` varchar(100) DEFAULT NULL,
   `date` datetime NOT NULL DEFAULT current_timestamp()
@@ -82,14 +82,24 @@ CREATE TABLE `instantUser` (
 --
 
 INSERT INTO `instantUser` (`name`, `email`, `panNo`, `mobile`, `loanAmt`, `typeOfLoan`, `annualIncome`, `city`, `salaryrecivedBank`, `empType`, `vechileType`, `date`) VALUES
-('sathish Kumar', 'sathish@gmail.com', 'ABCDS7687A', '1234567890', '100000', 'Personal Loan', '500000', 'Chennai', 'SBI', 'Salary', 'Two wheeler', '2020-08-09 20:24:44'),
-('sathish Kumar', 'sathish@gmail.com', 'ABCDS7687A', '1234567890', '100000', 'Personal Loan', '500000', 'Chennai', 'SBI', 'Salary', 'Two wheeler', '2020-08-09 20:29:17'),
-('sathish Kumar', 'sathish@gmail.com', 'ABCDS7687A', '1234567890', '100000', 'Personal Loan', '500000', 'Chennai', 'SBI', 'Salary', 'Two wheeler', '2020-08-09 20:36:05'),
-('sathish Kumar', 'sathish@gmail.com', 'ABCDS7687A', '1234567890', '100000', 'Personal Loan', '500000', 'Chennai', 'SBI', 'Salary', 'Two wheeler', '2020-08-09 20:36:24'),
-('sathish Kumar', 'sathish@gmail.com', 'ABCDS7687A', '1234567890', '100000', 'Personal Loan', '500000', 'Chennai', 'SBI', 'Salary', 'Two wheeler', '2020-08-09 20:36:26'),
-('sathish Kumar', 'sathish@gmail.com', 'ABCDS7687A', '1234567890', '100000', 'Personal Loan', '500000', 'Chennai', 'SBI', 'Salary', 'Two wheeler', '2020-08-09 20:36:27'),
-('sathish Kumar', 'sathish@gmail.com', 'ABCDS7687A', '1234567890', '100000', 'Personal Loan', '500000', 'Chennai', 'SBI', 'Salary', 'Two wheeler', '2020-08-13 14:14:49'),
-('sathish Kumar', 'sathish@gmail.com', 'ABCDS7687A', '1234567890', '100000', 'Personal Loan', '500000', 'Chennai', 'SBI', 'Salary', 'Two wheeler', '2020-08-16 21:16:32');
+('revathi', 'reva@gmail.com', '6789978', '1234567890', '567890', 'Personal Loan', '500000', 'chennai', 'SBI', 'Salary', 'Two wheeler', '2020-08-23 09:22:19'),
+('reva', 'reva@gmail.com', '57765765', '1234567890', '567890', 'Personal Loan', '500000', 'chennai', 'SBI', 'Salary', 'Two wheeler', '2020-08-23 09:25:20'),
+('reva', 'rev@', '65475476', '1234567890', '56787', 'Personal Loan', '500000', 'chennai', 'SBI', 'Salary', 'Two wheeler', '2020-08-23 09:26:55'),
+('undefined', 'rvea', '8768789', '1234567890', '67800', 'Personal Loan', '500000', 'chennai', 'SBI', 'Salary', 'Two wheeler', '2020-08-23 09:28:09'),
+('reva', 'reva', '5465775', '1234567890', '678787', 'Personal Loan', '500000', 'chennai', 'SBI', 'Salary', 'Two wheeler', '2020-08-23 09:30:43'),
+('reva', 'reva@g.com', '644756', '7567578', '67890', 'HomeLoan', '678000', 'chennai', 'NULL', 'Self Employed Professional', 'NULL', '2020-08-23 13:55:05'),
+('cartest', 'aa@bb.com', '5657657', '889787899', '500000', 'CarLoan', '450000', 'chennai', 'NULL', 'Self Employed Business', 'undefined', '2020-08-23 14:01:37'),
+('revathi', 'reva@gmail.com', '67675786', '56878665', '13000', 'HomeLoan', '56000', 'chennai', 'NULL', 'Self Employed Business', 'NULL', '2020-08-23 14:58:47'),
+('revathi', 'reva@gmail.com', '67675786', '56878665', '13000', 'HomeLoan', '56000', 'chennai', 'NULL', 'Self Employed Business', 'NULL', '2020-08-23 14:59:02'),
+('reva', 'cc@dd.com', '67576578', '8807804678', '4500', 'personalLoan', '56778', 'chennai', 'sbi', 'Self Employed Business', 'NULL', '2020-08-23 16:05:44'),
+('reva', 'cc@dd.com', '67576578', '8807804678', '4500', 'personalLoan', '56778', 'chennai', 'sbi', 'Self Employed Business', 'NULL', '2020-08-23 16:06:37'),
+('reva', 'cc@dd.com', '67576578', '8807804678', '4500', 'personalLoan', '56778', 'chennai', 'sbi', 'Self Employed Business', 'NULL', '2020-08-23 16:06:56'),
+('reva', 'cc@dd.com', '67576578', '8807804678', '4500', 'personalLoan', '56778', 'chennai', 'sbi', 'Self Employed Business', 'NULL', '2020-08-23 16:09:05'),
+('reva', 'cc@dd.com', '67576578', '8807804678', '4500', 'personalLoan', '56778', 'chennai', 'sbi', 'Self Employed Business', 'NULL', '2020-08-23 16:10:44'),
+('reva', 'aa@ee.com', '754gfhg66', '8807805654', '60000', 'personalLoan', '56900', 'chennai', 'sbi', 'Self Employed Professional', 'NULL', '2020-08-23 16:21:31'),
+('testing', 'dd@ee.com', '657657', '78976576', '567899', 'HomeLoan', '7667576', 'chennai', 'NULL', 'Salaried', 'NULL', '2020-08-23 16:27:40'),
+('undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'HomeLoan', 'undefined', 'undefined', 'NULL', 'empType', 'NULL', '2020-08-23 20:18:31'),
+('devadoss', 'ee@gg.com', '75748999755', '8896795456', '500000', 'HomeLoan', '750000', 'test', 'NULL', 'Self Employed Business', 'NULL', '2020-08-23 20:22:29');
 
 -- --------------------------------------------------------
 
@@ -115,6 +125,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`firstName`, `email`, `phonenumber`, `accountnumber`, `password`, `pancard`, `admin`, `date`) VALUES
 ('shy', 'aa@bb.com', '6536723589', '87872376', '1234567', 'bch85445', 'N', '2020-08-09 18:12:39'),
 ('Gowtham', 'gowtham90@gmail.com', '3434344344', '4354546565', 'gowtham@90', 'sfsfsff', 'N', '2020-08-09 19:36:38'),
+('Harian', 'harian@gmail.com', '9962137148', '6436473343', 'Harian@20', '', 'N', '2020-08-23 20:16:11'),
 ('sss', 'reva.shailaja@gmail.com', '3434', 'ww', '123456', 'df', 'N', '2020-08-14 11:38:04'),
 ('revathi', 'revathi.d1988@gmail.com', '9003273435', '1234567890', 'revathi@1988', 'DY4356656', 'N', '2020-07-20 00:31:37'),
 ('revathi', 'revathi.d1989@gmail.com', '9003273435', '1234567890', 'revathi@1988', 'DY4356656', 'N', '2020-08-09 17:23:41'),
@@ -146,7 +157,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `alert`
 --
 ALTER TABLE `alert`
-  MODIFY `alertid` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `alertid` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

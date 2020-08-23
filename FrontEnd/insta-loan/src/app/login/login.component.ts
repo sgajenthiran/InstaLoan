@@ -51,7 +51,9 @@ export class LoginComponent implements OnInit {
               this.errmsg=data.errorMsg;
             }
             
-        },err =>{ console.log("error");this.ngxService.stop();})
+        },err =>{ this.alertmsgflag=true;
+              this.errmsg="Unable to connect the server";
+              console.log("error");this.ngxService.stop();})
 
       
    }
