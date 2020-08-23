@@ -16,39 +16,31 @@
       <div class="container py-lg-md d-flex">
         <div class="col px-0">
          <h3> <span class="text-white"><u>{{title}}</u></span></h3><br>
+
           <div class="row">
             <div class="col-lg-10">
-
             <form #userlogin = "ngForm" >
-    <div class="row">
-      <div class="col-md-4" *ngFor="let loan of personalLoanArray">
-        <div class="form-group" *ngIf="loan.type != 'select'">
-          <span class="text-white">{{ loan.label }}</span>
-          <input type="{{ loan.type }}" name = "{{loan.name}}" ngModel ="{{loan.value}}" class="form-control form-control-alternative"  placeholder="{{ loan.placeholder }}">
-        </div>
-        <div class="form-group" *ngIf="loan.type == 'select'">
-          <div class="" ngbDropdown>
+
+            <div class="row">
+             <div class="col-md-4" *ngFor="let loan of personalLoanArray let i = index;">
+             <div class="form-group" *ngIf="loan.type != 'select'">
+              <span class="text-white">{{ loan.label }}</span>
+              <input type="{{ loan.type }}" name = "{{loan.name}}_{{i}}" [(ngModel)]="this[loan.name]"  class="form-control form-control-alternative"  placeholder="{{ loan.placeholder }}">
+            </div>
+            <div class="form-group" *ngIf="loan.type == 'select'">
+            <div class="" ngbDropdown>
             <span class="text-white">{{ loan.label }}</span>
+              <select id="loan" name="{{loan.name}}_{{i}}" [(ngModel)]="loan.name" class="form-control" >
 
-      <select id="dropdownMenuButton" class="form-control">
-        <option aria-labelledby="dropdownMenuButton" name="{{opt.name}}" *ngFor="let opt of loan.option">{{opt.value}}</option>
-      </select>
-      
-  </div>
-         
+
+               <option aria-labelledby="dropdownMenuButton" name="{{opt.name}}" *ngFor="let opt of loan.option" [value]="opt.value">{{opt.value}}</option>
+              </select>
+            </div>
+            </div>
+           </div>
         </div>
-
-      </div>
-
-     
-    
-
-    </div>
  
- 
-
-
-     <div class="row my-4">
+      <div class="row my-4">
                   <div class="col-12">
                     <div class="custom-control custom-control-alternative custom-checkbox">
                       <input class="custom-control-input" id="customCheckRegister" type="checkbox">

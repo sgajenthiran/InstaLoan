@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PojoService } from '../services/pojoservice';
 import { RegisterService } from '../services/registerservice';
 import { interval, Subscription } from 'rxjs';
+import { AuthService } from './../auth/auth.service';
 
 
 @Component({
@@ -20,7 +21,8 @@ private text = 'Your Text Here';
 
     constructor(
     	private registerService: RegisterService,
-    	private pojoService : PojoService
+    	private pojoService : PojoService,
+      private authService: AuthService
     	//subscription: Subscription
 
 
@@ -38,10 +40,9 @@ private text = 'Your Text Here';
        this.registerService.getData('get','getalertlist','').subscribe((data) => {
             if(data.result == "Success"){
               this.dataArray = data.alertList;
+              this.pojoService.setNotification(data.count);
             console.log(this.dataArray);
             console.log(data.alertList[0]);
-           // console.log(this.dataArray.alertId);
-           // console.log(data.readflag);
 
             }else if(data.result == "Failure"){
               alert(data.errorMsg);
@@ -58,6 +59,9 @@ private text = 'Your Text Here';
        this.registerService.getData('get','getalertlist','').subscribe((data) => {
             if(data.result == "Success"){
               this.dataArray = data.alertList;
+                            this.pojoService.setNotification(data.count);
+                            console.log(data.count);
+              this.authService.setNotificationCount(data.count);
             console.log(this.dataArray);
             console.log(data.alertList[0]);
            // console.log(this.dataArray.alertId);

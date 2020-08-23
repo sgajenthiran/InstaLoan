@@ -5,6 +5,7 @@ import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Location, PopStateEvent } from '@angular/common';
 import { PojoService } from '../../services/pojoservice';
 import { RegisterService } from '../../services/registerservice';
+import { interval, Subscription } from 'rxjs';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { RegisterService } from '../../services/registerservice';
     styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+subscription: Subscription;
     public isCollapsed = true;
     private lastPoppedUrl: string;
     private yScrollStack: number[] = [];
@@ -20,7 +22,11 @@ export class NavbarComponent implements OnInit {
     private isLogged = false;
     private isShown;
     private count;
-    
+    private alertbox = false;
+    notificationcount$:Observable<number>;
+    private source = interval(10000);
+private text = 'Your Text Here';
+
 
     constructor(
               private registerService: RegisterService,
@@ -32,12 +38,34 @@ export class NavbarComponent implements OnInit {
 
     ngOnInit() {
 
+        const source = interval(10000);
+    const text = 'Calling getAlertList navbar';
+    this.subscription = source.subscribe(val => this.opensnack(text));
 
         this.isLoggedIn$ = this.authService.isLoggedIn;
+        this.notificationcount$ = this.authService.getNotificationCount;
         this.authService.isLoggedIn.subscribe((login) => {
+        console.log("authservices");
             this.isLogged =login;
+            this.alertbox=false;
             this.isShown = this.pojoService.getAdminFlag();
             this.count=this.pojoService.getNotification();
+        });
+        
+        this.authService.getNotificationCount.subscribe((count) => {
+        console.log("*********");
+        console.log(this.count +" "+ count);
+
+
+        if(this.count < count){
+          this.alertbox = true;
+          
+        }else{
+          this.alertbox=false;
+
+        }
+        this.count=count;
+        
         });
 
 
@@ -61,6 +89,19 @@ export class NavbarComponent implements OnInit {
 
 
     }
+opensnack(text) {
+    // I've just commented this so that you're not bombarded with an alert.
+    console.log(text);
+
+       this.registerService.getData('get','getalertlist','').subscribe((data) => {
+            if(data.result == "Success"){
+              this.authService.setNotificationCount(data.count);
+            }else if(data.result == "Failure"){
+              console.log("error");
+            }
+            
+        },err =>{ console.log("error");})
+  }
 
     isHome() {
         var titlee = this.location.prepareExternalUrl(this.location.path());

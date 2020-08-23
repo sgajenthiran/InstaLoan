@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PojoService } from '../services/pojoservice';
 import { RegisterService } from '../services/registerservice';
 import { NgxUiLoaderService } from 'ngx-ui-loader'; // Import NgxUiLoaderService
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -30,7 +31,7 @@ export class LandingComponent implements OnInit {
       value: ''
     },
      {
-      type: 'text',
+      type: 'text', 
       label: 'Your gross annual sales / turnover?  ',
       placeholder:'XXX',
       value: ''
@@ -63,33 +64,54 @@ export class LandingComponent implements OnInit {
   constructor(
               private registerService: RegisterService,
               private pojoService: PojoService,
-              private ngxService: NgxUiLoaderService) { }
+              private ngxService: NgxUiLoaderService,
+              private router: Router) { }
 
   ngOnInit() {
     console.log(this.pojoService.getloanName());
     if(this.pojoService.getloanName()=='personalLoan'){
     this.title='personalLoan';
+    this.personalLoanArray=[];
       this.personalLoanArray=[
       {
-        type: 'text',
+        type: 'number',
         label: 'Your desired loan amount',
+        name:'loanAmt',
         placeholder:'XXX',
         value: ''
       },
       {
         type: 'text',
-        label: 'Your Employee Type ',
+        label: 'Name',
+        name:'name',
         placeholder:'XXX',
         value: ''
       },
+      {
+        type: 'date',
+        label: 'DOB',
+        name:'dob',
+        placeholder:'XXX',
+        value: ''
+      },
+      {
+        type: 'select',
+        label: 'Your Employee Type ',
+        name:'empType',
+        placeholder:'XXX',
+          option:[{name:"selfEmpBus",value:"Self Employed Business"},{name:"selfEmpPro",value:"Self Employed Professional"}]
+        
+      },
        {
-        type: 'text',
-        label: 'Your net monthly income ',
+        type: 'number',
+        label: 'Your annual income ',
+         name:'annualIncome',
         placeholder:'XXX',
         value: ''
       },{
         type: 'number',
         label: 'Mobile Number',
+        name:'mobile',
         placeholder:'XXX',
         value: ''
       },
@@ -97,98 +119,149 @@ export class LandingComponent implements OnInit {
           type: 'text',
           label: 'Your current city of residence ',
           placeholder:'XXX',
+          name:'city',
           value: ''
         },
          {
           type: 'text',
           label: 'Salary Received In ',
+          name:'salaryrecivedBank',
           placeholder:'XXX',
           value: ''
         },
          {
-          type: 'text',
+          type: 'number',
           label: 'Your net monthly income ',
+          name:'monthlyIncome',
           placeholder:'XXX',
           value: ''
         },{
-          type: 'text',
+          type: 'email',
           label: 'Email Address',
+          name:'email',
           placeholder:'XXX',
           value: ''
         },
         {
           type: 'select',
           label: 'Gender ',
+          name:'gender',
           option: [{"name":"female","value":"female"},{"name":"male","value":"male"}],
           placeholder:'XXX'
           
         },
          {
-          type: 'number',
+          type: 'text',
           label: 'Your Pan Card Number',
+          name:'panNo',
           placeholder:'XXX',
           value: ''
         }
       ];
     }else if(this.pojoService.getloanName()=='businessLoan'){
     this.title="BusinessLoan";
+    this.personalLoanArray=[];
       this.personalLoanArray=[
       {
-          type: 'text',
+          type: 'number',
           label: 'Your desired loan amount',
+          name:'loanAmt',
+          placeholder:'1000',
+          value: ''
+        },
+        {
+        type: 'text',
+          label: 'Name',
+          name:'name',
           placeholder:'1000',
           value: ''
         },
         {
           type: 'select',
           label: 'How are you currently employed ? ',
+          name:'empType',
           placeholder:'XXX',
           option:[{name:"selfEmpBus",value:"Self Employed Business"},{name:"selfEmpPro",value:"Self Employed Professional"}]
         },
          {
-          type: 'text',
+          type: 'number',
           label: 'Your gross annual sales / turnover?  ',
+          name:'annualIncome',
           placeholder:'XXX',
           value: ''
         },{
           type: 'text',
           label: 'Your gross annual profit ?',
+          name:'',
           placeholder:'XXX',
           value: ''
         },
         {
           type: 'text',
           label: 'Where do you currently reside ? ',
+          name:'city',
           placeholder:'XXX',
           value: ''
         },
          {
           type: 'number',
           label: 'Mobile Number ',
+          name:'mobile',
           placeholder:'XXX',
+          value: ''
+        },
+
+         {
+          type: 'email',
+          label: 'Email ID ',
+          name:'email',
+          placeholder:'XXX',
+          value: ''
+        },
+        {
+        type: 'text',
+          label: 'PanNo',
+          name:'panNo',
+          placeholder:'1000',
           value: ''
         }
       ];
     }else if(this.pojoService.getloanName()=='homeLoan'){
     this.title="HomeLoan";
+    this.personalLoanArray=[];
       this.personalLoanArray=[
       {
-        "type": "text",
+        "type": "number",
         "label": "Property cost",
         "name":"loanAmt",
         "placeholder": "XXX",
         "value": ""
       },
       {
+        "type": "number",
+        "label": "PhoneNo",
+        "name":"mobile",
+        "placeholder": "XXX",
+        "value": ""
+      },
+      {
         "type": "select",
         "label": "How are you currently employed ? ",
+        "name":"empType",
         "placeholder": "XXX",
         "option": [{"name":"empType","value":"Salaried"},{"name":"empType","value":"Self Employed Business"},{"name":"empType","value":"Self Employed Professional"}]
       },
       {
-        "type": "text",
+        "type": "number",
         "label": "Total EMI you pay currently ?",
         "name":"Emi",
+        "placeholder": "XXX",
+        "value": ""
+      },
+      {
+        "type": "number",
+        "label": "Annual Income",
+        "name":"annualIncome",
         "placeholder": "XXX",
         "value": ""
       },
@@ -200,14 +273,14 @@ export class LandingComponent implements OnInit {
         "value": ""
       },
       {
-        "type": "text",
+        "type": "email",
         "label": "Email ID",
         "name":"email",
         "placeholder": "XXX",
         "value": ""
       },
       {
-        "type": "number",
+        "type": "date",
         "label": "DOB ",
         "name":"dob",
         "placeholder": "XXX",
@@ -222,7 +295,8 @@ export class LandingComponent implements OnInit {
       },
       {
         "type": "select",
-        "label": "Gender ",
+        "label": "Gender",
+        "name":"sex",
         "option": [{"name":"female","value":"female"},{"name":"male","value":"male"}],
         "placeholder": "XXX"
       },
@@ -237,68 +311,11 @@ export class LandingComponent implements OnInit {
 
     }else if(this.pojoService.getloanName()=='carLoan'){
       this.title="CarLoan";
+      this.personalLoanArray=[];
       this.personalLoanArray=[
       {
-        "type": "text",
+        "type": "number",
         "label": "Loan Amount",
-        "placeholder": "XXX",
-        "value": ""
-      },
-      {
-        "type": "select",
-        "label": "How are you currently employed ? ",
-        "placeholder": "XXX",
-        "option": [{"name":"Salaried","value":"Salaried"},{"name":"selfEmpBus","value":"Self Employed Business"},{"name":"selfEmpPro","value":"Self Employed Professional"}]
-      },
-      {
-        "type": "text",
-        "label": "Annual Income",
-        "placeholder": "XXX",
-        "value": ""
-      },
-      {
-        "type": "text",
-        "label": "Your Full Name ",
-        "placeholder": "XXX",
-        "value": ""
-      },
-      {
-        "type": "text",
-        "label": "Email ID",
-        "placeholder": "XXX",
-        "value": ""
-      },
-      {
-        "type": "number",
-        "label": "Mobile Number ",
-        "placeholder": "XXX",
-        "value": ""
-      },
-      {
-        "type": "number",
-        "label": "Your Pan Card Number",
-        "placeholder": "XXX",
-        "value": ""
-      },
-      {
-        "type": "select",
-        "label": "Vechile Type ",
-        "placeholder": "XXX",
-        "option": [{"name":"Four Wheeler","value":"Four Wheeler"},{"name":"Two Wheeler","value":"Two Wheeler"}]
-      },
-      {
-        "type": "text",
-        "label": "Your current city of residence ",
-        "placeholder": "XXX",
-        "value": ""
-      }
-    ]
-    }else{
-    this.title="HomeLoan";
-    this.personalLoanArray=[
-      {
-        "type": "text",
-        "label": "Property cost",
         "name":"loanAmt",
         "placeholder": "XXX",
         "value": ""
@@ -306,13 +323,14 @@ export class LandingComponent implements OnInit {
       {
         "type": "select",
         "label": "How are you currently employed ? ",
+        "name":"empType",
         "placeholder": "XXX",
-        "option": [{"name":"empType","value":"Salaried"},{"name":"empType","value":"Self Employed Business"},{"name":"empType","value":"Self Employed Professional"}]
+        "option": [{"name":"Salaried","value":"Salaried"},{"name":"selfEmpBus","value":"Self Employed Business"},{"name":"selfEmpPro","value":"Self Employed Professional"}]
       },
       {
-        "type": "text",
-        "label": "Total EMI you pay currently ?",
-        "name":"Emi",
+        "type": "number",
+        "label": "Annual Income",
+        "name":"annualIncome",
         "placeholder": "XXX",
         "value": ""
       },
@@ -324,7 +342,7 @@ export class LandingComponent implements OnInit {
         "value": ""
       },
       {
-        "type": "text",
+        "type": "email",
         "label": "Email ID",
         "name":"email",
         "placeholder": "XXX",
@@ -332,6 +350,88 @@ export class LandingComponent implements OnInit {
       },
       {
         "type": "number",
+        "label": "Mobile Number ",
+        "name":"mobile",
+        "placeholder": "XXX",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "label": "Your Pan Card Number",
+        "name":"panNo",
+        "placeholder": "XXX",
+        "value": ""
+      },
+      {
+        "type": "select",
+        "label": "Vechile Type ",
+        "name":"vechileType",
+        "placeholder": "XXX",
+        "option": [{"name":"Four Wheeler","value":"Four Wheeler"},{"name":"Two Wheeler","value":"Two Wheeler"}]
+      },
+      {
+        "type": "text",
+        "label": "Your current city of residence ",
+        "name":"city",
+        "placeholder": "XXX",
+        "value": ""
+      }
+    ]
+    }else{
+    this.title="HomeLoan";
+    this.personalLoanArray=[];
+    this.personalLoanArray=[
+      {
+        "type": "number",
+        "label": "Property cost",
+        "name":"loanAmt",
+        "placeholder": "XXX",
+        "value": ""
+      },
+      {
+        "type": "number",
+        "label": "PhoneNo",
+        "name":"mobile",
+        "placeholder": "XXX",
+        "value": ""
+      },
+      {
+        "type": "select",
+        "label": "How are you currently employed ? ",
+        "name":"empType",
+        "placeholder": "XXX",
+        "option": [{"name":"empType","value":"Salaried"},{"name":"empType","value":"Self Employed Business"},{"name":"empType","value":"Self Employed Professional"}]
+      },
+      {
+        "type": "number",
+        "label": "Total EMI you pay currently ?",
+        "name":"Emi",
+        "placeholder": "XXX",
+        "value": ""
+      },
+      {
+        "type": "number",
+        "label": "Annual Income",
+        "name":"annualIncome",
+        "placeholder": "XXX",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "label": "Your Full Name ",
+        "name":"name",
+        "placeholder": "XXX",
+        "value": ""
+      },
+      {
+        "type": "email",
+        "label": "Email ID",
+        "name":"email",
+        "placeholder": "XXX",
+        "value": ""
+      },
+      {
+        "type": "date",
         "label": "DOB ",
         "name":"dob",
         "placeholder": "XXX",
@@ -346,7 +446,8 @@ export class LandingComponent implements OnInit {
       },
       {
         "type": "select",
-        "label": "Gender ",
+        "label": "Gender",
+        "name":"sex",
         "option": [{"name":"female","value":"female"},{"name":"male","value":"male"}],
         "placeholder": "XXX"
       },
@@ -365,14 +466,24 @@ export class LandingComponent implements OnInit {
 
       }
       onClickSubmit(data:any){
-        console.log(data.value);
+      this.ngxService.start();
+        console.log(data.value+"****"+this.title);
         let datas = data.value;
-        this.ngxService.start(); 
-          this.registerService.getData('post','loanDetails',datas).subscribe((data) => {
+        let datasplit = {};
+for(let key in datas){
+var tempkey = key.split("_")[0];
+var typeOfLoan='typeOfLoan';
+datasplit[tempkey]=datas[key];
+datasplit[typeOfLoan]=this.title;
+}
+
+console.log(datasplit);
+         
+          this.registerService.getData('post','loanDetails',datasplit).subscribe((data) => {
                   this.ngxService.stop();
                   console.log(data);
                   if(data.result == "Success"){
-
+                    this.router.navigate(['/home']);
                   }else if(data.result == "Failure"){
                     alert(data.errorMsg);
                   }

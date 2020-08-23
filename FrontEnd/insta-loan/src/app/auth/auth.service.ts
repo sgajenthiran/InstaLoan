@@ -8,10 +8,16 @@ import { PojoService } from '../services/pojoservice';
 @Injectable()
 export class AuthService {
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    private notificationCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+
 
   get isLoggedIn() {
     return this.loggedIn.asObservable();
   }
+
+get getNotificationCount(){
+  return this.notificationCount.asObservable();
+}
 
   constructor(
     private router: Router,
@@ -19,6 +25,11 @@ export class AuthService {
 
   ) {}
 
+  setNotificationCount(count){
+  console.log("authservice",count);
+  this.notificationCount.next(count);
+
+  }
   login(user: User) {
   let data = user.userDetail;
     if (data.userName !== '' && data.password !== '' ) {
@@ -41,4 +52,17 @@ export class AuthService {
     this.loggedIn.next(false);
     this.router.navigate(['/']);
   }
+
+  /*
+
+       this.registerService.getData('get','getalertlist','').subscribe((data) => {
+            if(data.result == "Success"){
+              this.pojoService.setNotification(data.count);
+
+            }else if(data.result == "Failure"){
+              alert(data.errorMsg);
+            }
+            
+        },err =>{ console.log("error");})
+  */
 }
