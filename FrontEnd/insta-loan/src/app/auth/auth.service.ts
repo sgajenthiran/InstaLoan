@@ -15,9 +15,9 @@ export class AuthService {
     return this.loggedIn.asObservable();
   }
 
-get getNotificationCount(){
-  return this.notificationCount.asObservable();
-}
+  get getNotificationCount(){
+    return this.notificationCount.asObservable();
+  }
 
   constructor(
     private router: Router,
@@ -26,15 +26,15 @@ get getNotificationCount(){
   ) {}
 
   setNotificationCount(count){
-  console.log("authservice",count);
-  this.notificationCount.next(count);
-
+    //console.log("authservice",count);
+    this.notificationCount.next(count);
   }
+
   login(user: User) {
   let data = user.userDetail;
     if (data.userName !== '' && data.password !== '' ) {
-    this.pojoService.setNotification(user.count);
-    let admin = user.userDetail.admin;
+      this.pojoService.setNotification(user.count);
+      let admin = user.userDetail.admin;
             
             if(admin == "Y"){  
                 this.pojoService.setAdminFlag(true); 
@@ -53,16 +53,4 @@ get getNotificationCount(){
     this.router.navigate(['/']);
   }
 
-  /*
-
-       this.registerService.getData('get','getalertlist','').subscribe((data) => {
-            if(data.result == "Success"){
-              this.pojoService.setNotification(data.count);
-
-            }else if(data.result == "Failure"){
-              alert(data.errorMsg);
-            }
-            
-        },err =>{ console.log("error");})
-  */
 }

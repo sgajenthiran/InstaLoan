@@ -19,13 +19,19 @@
 
           <div class="row">
             <div class="col-lg-10">
-            <form #userlogin = "ngForm" >
-
+            <form #userlogin = "ngForm" (ngSubmit)=" userlogin.form.valid && onClickSubmit(userlogin) " >
+<!-- (ngSubmit) = "userlogin.form.valid && onClickSubmit(userlogin.value) "-->
             <div class="row">
              <div class="col-md-4" *ngFor="let loan of personalLoanArray let i = index;">
              <div class="form-group" *ngIf="loan.type != 'select'">
               <span class="text-white">{{ loan.label }}</span>
-              <input type="{{ loan.type }}" name = "{{loan.name}}_{{i}}" [(ngModel)]="this[loan.name]"  class="form-control form-control-alternative"  placeholder="{{ loan.placeholder }}">
+             <!-- <input type="{{ loan.type }}" name = "{{loan.name}}_{{i}}" [(ngModel)]="this[loan.name]"  class="form-control form-control-alternative" [ngClass]="{ 'is-invalid': {{loan.name}}_{{i}}.submitted && {{loan.name}}_{{i}}.invalid }" placeholder="{{ loan.placeholder }}" required>
+              <div *ngIf="{{loan.name}}_{{i}}.errors.required">Fields  is required</div>-->
+
+               <input type="{{ loan.type }}" name = "{{loan.name}}_{{i}}" [(ngModel)]="this[loan.name]" class="form-control form-control-alternative" [ngClass]="{ 'is-invalid': 'loan.name_i'.submitted && 'loan.name_i'.invalid }" placeholder="{{ loan.placeholder }}" required>
+              <!-- <div *ngIf="userlogin.submitted && {{loan.name_i}}.invalid" class="invalid-feedback">-->
+              <div *ngIf="!isValid">Fields  is required</div>
+
             </div>
             <div class="form-group" *ngIf="loan.type == 'select'">
             <div class="" ngbDropdown>
@@ -55,7 +61,7 @@
       
        <div class="row">
         <div class="col-6">
-       <button class="btn btn-primary btn-lg btn-block active" (click)="onClickSubmit(userlogin) " type="button">Proceed</button>
+       <button class="btn btn-primary btn-lg btn-block active"  type="submit">Proceed</button>
 
       </div>
        </div>

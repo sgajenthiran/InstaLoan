@@ -17,49 +17,6 @@ export class LandingComponent implements OnInit {
   private title;
   private personalLoanArray;
 
-  /* private bussinessLoanArray=[
-	{
-      type: 'text',
-      label: 'Your desired loan amount',
-      placeholder:'1000',
-      value: ''
-    },
-    {
-      type: 'text',
-      label: 'How are you currently employed ? ',
-      placeholder:'XXX',
-      value: ''
-    },
-     {
-      type: 'text', 
-      label: 'Your gross annual sales / turnover?  ',
-      placeholder:'XXX',
-      value: ''
-    },{
-      type: 'text',
-      label: 'Your gross annual profit ?',
-      placeholder:'XXX',
-      value: ''
-    },
-    {
-      type: 'text',
-      label: 'Where do you currently reside ? ',
-      placeholder:'XXX',
-      value: ''
-    },
-     {
-      type: 'text',
-      label: 'Email Address  ',
-      placeholder:'XXX',
-      value: ''
-    },
-     {
-      type: 'number',
-      label: 'Mobile Number ',
-      placeholder:'XXX',
-      value: ''
-    }
-  ];*/
 
   constructor(
               private registerService: RegisterService,
@@ -70,7 +27,7 @@ export class LandingComponent implements OnInit {
   ngOnInit() {
     console.log(this.pojoService.getloanName());
     if(this.pojoService.getloanName()=='personalLoan'){
-    this.title='personalLoan';
+    this.title='PersonalLoan';
     this.personalLoanArray=[];
       this.personalLoanArray=[
       {
@@ -310,7 +267,7 @@ export class LandingComponent implements OnInit {
     ]
 
     }else if(this.pojoService.getloanName()=='carLoan'){
-      this.title="CarLoan";
+      this.title="AutoMobileLoan";
       this.personalLoanArray=[];
       this.personalLoanArray=[
       {
@@ -480,15 +437,17 @@ datasplit[typeOfLoan]=this.title;
 console.log(datasplit);
          
           this.registerService.getData('post','loanDetails',datasplit).subscribe((data) => {
-                  this.ngxService.stop();
+                 // this.ngxService.stop();
                   console.log(data);
                   if(data.result == "Success"){
-                    this.router.navigate(['/home']);
+                   // this.router.navigate(['/home']);
                   }else if(data.result == "Failure"){
-                    alert(data.errorMsg);
+                    console.log(data.errorMsg);
                   }
                   
-              },err =>{ console.log("error");this.ngxService.stop();})
+              },err =>{ console.log("error");
+              this.ngxService.stop();
+              })
       }
 
     }

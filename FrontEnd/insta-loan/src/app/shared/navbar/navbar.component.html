@@ -155,26 +155,15 @@
   </div>
 <span *ngIf="isLoggedIn$  | async as isLoggedIn ">
   <span *ngIf="isShown">
-  <div class="alert alert-success alert-dismissible fade show" role="alert"  *ngIf="alertbox">
-    <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
-    <span class="alert-inner--text"><strong>Success!</strong> Notification message success alert—check it out!</span>
+ <div class="alert alert-success alert-dismissible fade show" role="alert"  *ngIf="alertbox">
+    <!--<span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>-->
+    <span class="alert-inner--text"> Notification message received </span>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">×</span>
     </button>
   </div>
 </span>
 </span>
-  <!--<a (click)="onLogIn()"  class="btn btn-primary btn-icon " *ngIf="!isLogged" style="margin:10px;">Login</a>--
 
-  <div *ngIf="isLoggedIn$ | async as isLoggedIn"> 
-    <a (click)="onLogout()" class="btn btn-neutral btn-icon" *ngIf="isLoggedIn" style="margin:10px;"><span class="btn-inner--icon">
-            </span>
-            <span  class="nav-link-inner--text" >Logout</span></a>
-     <a  (click)="onLogout()" class="btn btn-neutral btn-icon" *ngIf="!isLogged">
-            <span class="btn-inner--icon">
-              <i class="fa fa-sign-out mr-2"></i>
-            </span>
-            <span  class="nav-link-inner--text" >Logout</span>
-          </a>
-  </div>-->
 </nav>
+
