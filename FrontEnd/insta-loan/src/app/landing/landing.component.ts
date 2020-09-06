@@ -15,6 +15,7 @@ export class LandingComponent implements OnInit {
   focus: any;
   focus1: any;
   private title;
+  errmsg;
   private personalLoanArray;
 
 
@@ -244,7 +245,7 @@ export class LandingComponent implements OnInit {
         "value": ""
       },
       {
-        "type": "number",
+        "type": "text",
         "label": "Your Pan Card Number",
         "name":"panNo",
         "placeholder": "XXX",
@@ -440,12 +441,14 @@ console.log(datasplit);
                  // this.ngxService.stop();
                   console.log(data);
                   if(data.result == "Success"){
-                   // this.router.navigate(['/home']);
+                    this.router.navigate(['/home']);
                   }else if(data.result == "Failure"){
                     console.log(data.errorMsg);
+                    this.errmsg=data.errorMsg;
                   }
                   
-              },err =>{ console.log("error");
+              },err =>{ console.log("error","unable to process your request");
+              this.errmsg="unable to process your request";
               this.ngxService.stop();
               })
       }

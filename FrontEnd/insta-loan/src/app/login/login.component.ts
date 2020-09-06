@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
  onClickSubmit(data:any) {
+ console.log(data);
   this.ngxService.start(); 
     this.registerService.getData('post','getLoginAuthendicate',data).subscribe((data) => {
             

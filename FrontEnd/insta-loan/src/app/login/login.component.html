@@ -20,21 +20,31 @@
                 <small>Sign in with credentials</small>
               </div>
               <form role="form" #userlogin = "ngForm" (ngSubmit) = "userlogin.form.valid && onClickSubmit(userlogin.value) ">
+
+
+
                 <div class="form-group mb-3" [ngClass]="{'focused':focus===true}">
                   <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Email" name = "userName" type="email" ngModel (focus)="focus=true" (blur)="focus=false" required>
+                    <input id="userName" class="form-control" placeholder="Email" name = "userName" type="email" ngModel (focus)="focus=true" [(ngModel)]="userlogin.userName" (blur)="focus=false" #userName="ngModel" required>
+                     
                   </div>
+                  <div *ngIf="(userlogin.submitted || userName.touched) && userName.errors">
+    Name is required.
+  </div>
                 </div>
                 <div class="form-group" [ngClass]="{'focused':focus1===true}">
                   <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Password" name = "password" type="password" ngModel (focus)="focus1=true" (blur)="focus1=false" required>
+                    <input id="password" class="form-control" placeholder="Password" name = "password" type="password" ngModel (focus)="focus1=true" [(ngModel)]="userlogin.password" (blur)="focus1=false" #password="ngModel" required>
                   </div>
+                  <div *ngIf="(userlogin.submitted || password.touched) && password.errors">
+    Password is required.
+  </div>
                 </div>
                 <!--<div class="custom-control custom-control-alternative custom-checkbox">
                   <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
@@ -43,7 +53,7 @@
                   </label>
                 </div>-->
                 <div >
-                  <button  [routerLink]="['/register']" class="btn btn-primary  my-4 float-left " >Sign up</button>
+                  <button type="button" [routerLink]="['/register']" class="btn btn-primary  my-4 float-left " >Sign up</button>
                   <button type="submit" class="btn btn-default my-4 float-right" >Sign in</button>
                
                 </div>
@@ -52,13 +62,17 @@
                      {{alertMsg}}
                 </div>
 
-                 <div class="alert alert-danger" role="alert" *ngIf="alertmsgflag">
-                     {{this.errmsg}}
-                </div>
+                
               </form>
+
             </div>
           </div>
           <div class="row mt-3">
+            <div class="col-6">
+            <div class="alert alert-danger" role="alert" *ngIf="alertmsgflag">
+                     {{this.errmsg}}
+                </div>
+              </div>
            <!-- <div class="col-6">
               <a href="javascript:void(0)" class="text-light">
                 <small>Forgot password?</small>
