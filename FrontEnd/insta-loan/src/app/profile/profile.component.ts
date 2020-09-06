@@ -13,6 +13,7 @@ import { AuthService } from './../auth/auth.service';
 
 export class ProfileComponent implements OnInit {
 	  subscription: Subscription;
+    errmsg;
 
 	private dataArray=[];
 
@@ -68,10 +69,11 @@ private text = 'Your Text Here';
            // console.log(data.readflag);
 
             }else if(data.result == "Failure"){
-              alert(data.errorMsg);
+              console.log(data.errorMsg);
+              this.errmsg=data.errorMsg;
             }
             
-        },err =>{ console.log("error");})
+        },err =>{ this.errmsg="Unable to connect the server";console.log("error");})
   }
 
   ngOnDestroy() {
